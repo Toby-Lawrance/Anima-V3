@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{102C373B-6ACF-49D4-9A5A-2C6A7E37938D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Anima.Core</RootNamespace>
+    <AssemblyName>Anima.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Speech" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\Command List.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Command List.Designer.cs">
+      <DependentUpon>Command List.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoadOrderManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoadOrderManager.Designer.cs">
+      <DependentUpon>LoadOrderManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\New Program Command.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\New Program Command.Designer.cs">
+      <DependentUpon>New Program Command.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProgramOpen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProgramOpen.Designer.cs">
+      <DependentUpon>ProgramOpen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ProgramOpenManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProgramOpenManager.Designer.cs">
+      <DependentUpon>ProgramOpenManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\VoiceSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\VoiceSelection.Designer.cs">
+      <DependentUpon>VoiceSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PluginManager\IModule.cs" />
+    <Compile Include="PluginManager\PluginManager.cs" />
+    <Compile Include="Properties\CoreSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>CoreSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Static Anima Object\AnimaCentral.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Static Anima Object\Anima.Properties.cs" />
+    <Compile Include="AnimaCoreModule.Execute.cs" />
+    <Compile Include="Static Anima Object\Command.cs" />
+    <Compile Include="Static Anima Object\HelperStructs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BluePasukon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\Command List.resx">
+      <DependentUpon>Command List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoadOrderManager.resx">
+      <DependentUpon>LoadOrderManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\New Program Command.resx">
+      <DependentUpon>New Program Command.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgramOpen.resx">
+      <DependentUpon>ProgramOpen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgramOpenManager.resx">
+      <DependentUpon>ProgramOpenManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\VoiceSelection.resx">
+      <DependentUpon>VoiceSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\CoreSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>CoreSettings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

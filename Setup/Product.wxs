@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="Anima" Language="1033" Version="1.0.0.0" Manufacturer="TobyCode" UpgradeCode="e15ac883-3a5f-473e-acbb-35ad22b9932f">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Anima" />
+    <Property Id="WixShellExecTarget" Value="[#AnimaExecutable]" />
+    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
+    <UI Id="MyWixUI_Mondo">
+      <UIRef Id="WixUI_InstallDir"/>
+      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    
+    
+		<Feature Id="ProductFeature" Title="Setup" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="Resources"/>
+      <ComponentRef Id="ApplicationShortcut"/>
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="Anima"/>
+      </Directory>
+			<Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Anima">
+          <Directory Id="PLUGINFOLDER" Name="Plugins"/>
+          <Directory Id="RESOURCEFOLDER" Name="Resources"/>
+        </Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>    
+    
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			 <Component Id="Executable"> 
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+         <File Id="AnimaExecutable" Name="$(var.Anima.TargetFileName)" Source="$(var.Anima.TargetPath)" DiskId="1"/>
+			 </Component>
+      <Component Id="CoreModule">
+        <File Id="CoreModule" Name="$(var.Anima.Core.TargetFileName)" Source="$(var.Anima.Core.TargetPath)" DiskId="1"/>
+        <File Id="CoreModuleConfig" Name="$(var.Anima.Core.TargetFileName).config" Source="$(var.Anima.Core.ProjectDir)/app.config" DiskId="1"/>
+      </Component>
+
+      <Component Id="AutoStartRegistry">
+        <RegistryKey Root="HKCU" Key="Software\Microsoft\Windows\CurrentVersion\Run" >
+          <RegistryValue Type="string" Name="Anima" Value="[INSTALLFOLDER]Anima.exe" />
+        </RegistryKey>
+      </Component>
+      
+		</ComponentGroup>
+
+    <ComponentGroup Id="Resources" Directory="RESOURCEFOLDER">
+      <Component Id="DefaultImageResource">
+        <File Id="ImageResource" Name="BluePaukon.png" Source="$(var.Anima.Core.ProjectDir)/Resources/BluePasukon.png"/>
+      </Component>
+    </ComponentGroup>
+
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="*">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="Anima"
+                  Description ="Anima - Personal Assistant"
+                  Target ="[#AnimaExecutable]"
+                  WorkingDirectory = "APPLICATIONROOTDIRECTORY" />
+        <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\Anima" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+    
+	</Fragment>
+</Wix>
